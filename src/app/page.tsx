@@ -28,19 +28,19 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-200">
-      <div className="w-[375px] h-[700px] bg-[#093D39] shadow-lg overflow-hidden relative">
+    <div className="flex justify-center items-center min-h-screen ">
+      <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative">
         <div
           className={`absolute w-full transition-all duration-1000 ease-in-out ${
             isAnimated ? "top-16" : "top-1/2 -translate-y-1/2"
           }`}
         >
-          <h1 className="text-white text-5xl font-serif text-center">
+          <h1 className="text-white font-serif text-center">
             Aurevia
           </h1>
         </div>
 
-        <Login show={showLoginForm} />
+        {showLoginForm && <Login />}
       </div>
     </div>
   );

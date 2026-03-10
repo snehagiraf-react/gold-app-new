@@ -1,37 +1,24 @@
 {
-  "name": "Gold Jewellery App",
-  "short_name": "Gold App",
-  "description": "Gold Jewellery Management System",
+  "name": "Gold App",
+  "short_name": "GoldApp",
+  "description": "Gold App - Progressive Web Application",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#d4af37",
   "orientation": "portrait",
+  "theme_color": "#093D39",
+  "background_color": "#093D39",
   "icons": [
     {
-      "src": "/icons/icon-72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-192.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
