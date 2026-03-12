@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Login from "@/app/login/page";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [isAnimated, setIsAnimated] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     // Scroll to top
@@ -16,31 +16,29 @@ export default function Home() {
       setIsAnimated(true);
     }, 1000);
 
-    // Show login form after animation completes
-    const formTimer = setTimeout(() => {
-      setShowLoginForm(true);
+    // Redirect to login page after animation completes
+    const redirectTimer = setTimeout(() => {
+      router.push("/login");
     }, 1200);
 
     return () => {
       clearTimeout(animationTimer);
-      clearTimeout(formTimer);
+      clearTimeout(redirectTimer);
     };
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex justify-center items-center min-h-screen ">
-      <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative">
+      <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative flex flex-col justify-center items-center">
         <div
-          className={`absolute w-full transition-all duration-1000 ease-in-out ${
-            isAnimated ? "top-16" : "top-1/2 -translate-y-1/2"
+          className={`transition-all duration-1000 ease-in-out w-full ${
+            isAnimated ? "-mt-32" : "mb-0"
           }`}
         >
           <h1 className="text-white font-serif text-center">
             Aurevia
           </h1>
         </div>
-
-        {showLoginForm && <Login />}
       </div>
     </div>
   );

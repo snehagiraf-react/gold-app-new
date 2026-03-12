@@ -10,7 +10,7 @@ export default function Register() {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen ">
-      <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative">
+      <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative p-6">
        
           <h1 className="text-white !text-7xl font-serif text-center mt-25">
             Aurevia
@@ -19,7 +19,7 @@ export default function Register() {
             Create your account
           </p>
           <form action="post">
-            <div className="space-y-4 px-8">
+            <div className="space-y-4">
               <label htmlFor="email" className="text-white text-sm">
                 Full Name
               </label>
