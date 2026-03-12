@@ -1,5 +1,9 @@
+"use client";
+
 import { Menu, TrendingDown, IndianRupee } from "lucide-react";
 import type { GoldRateCards } from "@/js/types/gold-rate";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -27,7 +31,13 @@ const goldratedatav: GoldRateCards[] = [
 ];
 
 export default function Index() {
-  const dateandtime = new Date().toLocaleString();
+  const [dateandtime, setDateandtime] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    setDateandtime(new Date().toLocaleString());
+  }, []);
+
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
@@ -66,23 +76,30 @@ export default function Index() {
 
           <div className="mt-6 sm:mt-8">
             <h5 className="flex items-center bg-[#FFE2E2] p-4 sm:p-5 w-full rounded-4xl text-[#C10007] text-sm sm:text-base font-bold justify-center">
-              <TrendingDown className="text-[#C10007] w-5 h-5 sm:w-6 sm:h-6" /> &nbsp;
+              <TrendingDown className="text-[#C10007] w-5 h-5 sm:w-6 sm:h-6" />{" "}
+              &nbsp;
               <IndianRupee className="text-[#C10007] w-5 h-5 sm:w-6 sm:h-6 font-bold" />
               &nbsp;90 per gram
             </h5>
           </div>
 
-<footer className="absolute bottom-20 left-0 w-full p-4 sm:p-6 bg-[#093D39] text-center text-white text-xs sm:text-sm">
-          <div className="space-y-3 sm:space-y-4">
-            <Button className="w-full !bg-gradient-to-r from-[#FB9600] to-[#E27300] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold">
-              Choose Your Template
-            </Button>
-            <Button className="w-full !bg-transparent border-1 !border-[#FB9600] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold">
-              Create Your Own Template
-            </Button>
-          </div>
-  <p className="text-chart-4 mt-3 sm:mt-4">Gold rates update twice daily.</p>
-</footer>
+          <footer className="absolute bottom-20 left-0 w-full p-4 sm:p-6 bg-[#093D39] text-center text-white text-xs sm:text-sm">
+            <div className="space-y-3 sm:space-y-4">
+              <Button
+                className="w-full !bg-gradient-to-r from-[#FB9600] to-[#E27300] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold"
+                onClick={() => router.push("/chooseTemplate")}
+              >
+                Choose Your Template
+              </Button>
+
+              <Button className="w-full !bg-transparent border-1 !border-[#FB9600] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold">
+                Create Your Own Template
+              </Button>
+            </div>
+            <p className="text-chart-4 mt-3 sm:mt-4">
+              Gold rates update twice daily.
+            </p>
+          </footer>
         </div>
       </div>
     </>

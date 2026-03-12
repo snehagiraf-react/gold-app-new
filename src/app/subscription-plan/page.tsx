@@ -159,12 +159,10 @@ export default function SubscriptionPlan() {
 
         </div>
 
-        <footer>
-          <p className="text-center text-white/70 text-xs mt-6">
+        <footer className="text-center text-white/70 text-xs mt-6">          
             <p>Subscription auto-renews.Cancel anytime.</p>
             <p>Secure payment . No hidden charges</p>
 
-          </p>
         </footer>
 
       </div>
