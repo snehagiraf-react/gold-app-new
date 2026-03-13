@@ -60,7 +60,7 @@ export default function SubscriptionPlan() {
       <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl min-h-screen p-4 sm:p-6 pb-40">
         {/* Header */}
         <div className="flex items-center gap-3 mt-10">
-          <MoveLeft className="text-white w-5 h-5 cursor-pointer" 
+          <MoveLeft className="text-white w-5 h-5 cursor-pointer"
           onClick={() => router.back('/login')}/>
           <h4 className="text-white text-lg font-medium">
             <Link href="/subscription-plan">Choose Your Subscription</Link>

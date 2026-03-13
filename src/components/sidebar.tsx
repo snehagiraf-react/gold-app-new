@@ -28,6 +28,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       label: "Subscription Plan",
       icon: CreditCard,
     },
+    {
+      href: "/imageManager",
+      label: "Image Manager",
+      icon: FileText,
+    }
+
   ];
 
   return (
