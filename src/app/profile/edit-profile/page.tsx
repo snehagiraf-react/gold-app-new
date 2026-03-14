@@ -142,6 +142,13 @@ export default function EditProfile() {
                   />
                 </div>
               </form>
+
+              <Button
+                onClick={() => alert("Profile updated!")}
+                className="mt-6 w-full bg-chart-7 hover:bg-chart-7/90 text-white !p-6"
+              >
+                Save Changes
+              </Button>
             </div>
           </div>
         </div>
