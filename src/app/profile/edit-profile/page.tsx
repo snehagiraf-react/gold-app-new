@@ -9,14 +9,8 @@ import {
   MapPin,
   HardDriveUpload,
   Lock,
+  Camera,
 } from "lucide-react";
-import type { SubscriptionPlanCards } from "@/js/types/gold-rate";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/cards";
 import { Button } from "@/components/button";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Header from "@/components/header";
@@ -36,7 +30,7 @@ const userProfile: UserProfile[] = [
   },
 ];
 
-export default function Profile() {
+export default function EditProfile() {
   const router = useRouter();
 
   const handleEditProfile = () => {
@@ -68,7 +62,7 @@ export default function Profile() {
 
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto px-6 pb-10">
-              <div className="flex justify-center mt-6 ">
+              <div className="flex justify-center mt-6 relative">
                 <Image
                   src={userProfile[0].image}
                   alt="User Logo"
@@ -76,7 +70,18 @@ export default function Profile() {
                   height={100}
                   className="rounded-full w-24 h-24 object-cover"
                 />
+
+                <label className="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-xl border border-gray-200 cursor-pointer hover:bg-gray-50 hover:scale-110 transition-all">
+              <Camera className="w-4 h-4 text-gray-600" />
+              <input
+                type="file"
+                className="hidden"
+                accept="image/png, image/jpeg, image/jpg"
+              />
+            </label>
               </div>
+
+              
 
               <form className="mt-10">
                 <div className="space-y-4 text-chart-7 font-light">
