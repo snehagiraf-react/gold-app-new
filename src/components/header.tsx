@@ -11,7 +11,7 @@ interface HeaderProps {
 export default function Header({ onMenuClick, title, showBackground = true }: HeaderProps) {
   return (
     <>
-      <div className={`flex items-center sticky top-0 z-30 pt-15 ${showBackground ? 'bg-[#093D39]' : ''}`}>
+      <div className={`flex items-center sticky top-0 z-30 ${showBackground ? 'bg-[#093D39]' : ''}`}>
         <button
           onClick={onMenuClick}
           className="p-4 text-white hover:bg-white/10 transition-colors flex-shrink-0"

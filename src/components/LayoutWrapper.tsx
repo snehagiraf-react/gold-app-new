@@ -5,7 +5,7 @@ import Header from "./header";
 import Sidebar from "./sidebar";
 
 interface LayoutWrapperProps {
-  children: React.ReactNode;
+  children: React.ReactNode | ((props: { toggleSidebar: () => void; title?: string }) => React.ReactNode);
   title?: string;
   showBackground?: boolean;
   showHeader?: boolean;
@@ -27,9 +27,8 @@ export default function LayoutWrapper({ children, title, showBackground = true, 
     <div className={`relative min-h-screen ${showBackground ? 'bg-white' : ''}`}>
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       <div className={`transition-transform duration-300 ${isSidebarOpen ? 'translate-x-64' : 'translate-x-0'}`}>
-        {showHeader && <Header onMenuClick={toggleSidebar} title={title} showBackground={showHeaderBg} />}
-        <main className="pb-4">
-          {children}
+        <main>
+          {typeof children === 'function' ? children({ toggleSidebar, title }) : children}
         </main>
       </div>
     </div>
