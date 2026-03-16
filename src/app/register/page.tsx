@@ -3,10 +3,18 @@
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/button";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    router.push("/subscription-plan");
+  }
   return (
     <>
       <div className="flex justify-center items-center min-h-screen ">
@@ -18,7 +26,7 @@ export default function Register() {
           <p className="text-[#ffffffa9] text-center mb-8">
             Create your account
           </p>
-          <form action="post">
+          <form onSubmit={handleSubmit}>
             <div className="space-y-4">
               <label htmlFor="email" className="text-white text-sm">
                 Full Name
@@ -138,9 +146,10 @@ export default function Register() {
                   )}
                 </button>
               </div>
-              <button className="w-full py-3 rounded-sm bg-white text-[#275152] font-semibold hover:bg-white/90 transition-colors text-sm">
+              <Button className="w-full py-3 rounded-sm bg-white text-[#275152] font-semibold hover:bg-white/90 transition-colors text-sm" 
+              >
                 Sign Up
-              </button>
+              </Button>
 
               <div className="text-center mb-5">
                 <Link href="/" className="text-white text-sm hover:underline">

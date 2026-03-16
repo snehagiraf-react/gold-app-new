@@ -25,7 +25,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     { href: "/profile", label: "Profile", icon: UserPlus },
     { href: "/chooseTemplate", label: "Choose Template", icon: FileText },
     {
-      href: "/subscription-plan",
+      href: "/my-subscription",
       label: "Subscription Plan",
       icon: CreditCard,
     },

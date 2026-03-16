@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { useRef, useState } from "react";
 import {
   SquarePen,
   UserRound,
@@ -9,38 +10,44 @@ import {
   MapPin,
   HardDriveUpload,
   Lock,
+  Camera,
 } from "lucide-react";
-import type { SubscriptionPlanCards } from "@/js/types/gold-rate";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/cards";
+
 import { Button } from "@/components/button";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Header from "@/components/header";
-import { UserProfile } from "@/js/types/profile";
 import Image from "next/image";
 
-const userProfile: UserProfile[] = [
-  {
-    id: "1",
-    name: "jacob smith",
-    image: "/template.png",
-    email: "user@example.com",
-    phoneNumber: "123-456-7890",
-    address: "123 Main St, City, Country",
-    logoUrl: "/logo.png",
-    password: "password123",
-  },
-];
+const userProfile = {
+  id: "1",
+  name: "jacob smith",
+  image: "/template.png",
+  email: "user@example.com",
+  phoneNumber: "123-456-7890",
+  address: "123 Main St, City, Country",
+  logoUrl: "/logo.png",
+  password: "password123",
+};
 
 export default function Profile() {
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isEdit = pathname.includes("edit-profile");
+
+  const fileInputRef = useRef(null);
+  const [profileImage, setProfileImage] = useState(userProfile.image);
 
   const handleEditProfile = () => {
     router.push("/profile/edit-profile");
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const preview = URL.createObjectURL(file);
+      setProfileImage(preview);
+    }
   };
 
   return (
@@ -48,95 +55,165 @@ export default function Profile() {
       {({ toggleSidebar, title }) => (
         <div className="flex justify-center">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl h-screen bg-[#093D39] flex flex-col relative">
+
             {/* Header */}
             <Header
               onMenuClick={toggleSidebar}
-              title={title}
+              title={isEdit ? "Edit Profile" : title}
               showBackground={false}
               showBackButton={true}
               onBackClick={() => router.back()}
               rightAction={
-                <Button
-                  onClick={handleEditProfile}
-                  className="text-chart-7 hover:bg-white/10 transition-colors !border-none !bg-transparent text-4xl"
-                  aria-label="Edit profile"
-                >
-                  <SquarePen size={30} />
-                </Button>
+                !isEdit && (
+                  <Button
+                    onClick={handleEditProfile}
+                    className="text-chart-7 hover:bg-white/10 transition-colors !border-none !bg-transparent"
+                  >
+                    <SquarePen size={30} />
+                  </Button>
+                )
               }
             />
 
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto px-6 pb-10">
-              <div className="flex justify-center mt-6 ">
-                <Image
-                  src={userProfile[0].image}
-                  alt="User Logo"
-                  width={100}
-                  height={100}
-                  className="rounded-full w-24 h-24 object-cover"
-                />
+
+              {/* Profile Image */}
+              <div className="flex justify-center mt-6">
+                <div className="relative">
+
+                  <Image
+                    src={profileImage}
+                    alt="User"
+                    width={100}
+                    height={100}
+                    className="rounded-full w-24 h-24 object-cover border-2"
+                  />
+
+                      
+
+                  {isEdit && (
+                    <>
+                      <Button
+                        type="button"
+                        onClick={() => fileInputRef.current.click()}
+                        className="absolute bottom-[-5px] right-[-5px] bg-[#FB9600] p-2 rounded-full shadow-md"
+                      >
+                        <Camera size={16} className="text-white" />
+                      </Button>
+
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleImageUpload}
+                      />
+                    </>
+                  )}
+
+                </div>
               </div>
 
+                        <h2 className="text-lg font-semibold text-white mt-4 text-center" disabled={!isEdit}>
+                  {userProfile.name}
+                </h2>
+
+              {/* Form */}
               <form className="mt-10">
                 <div className="space-y-4 text-chart-7 font-light">
-                  <label className="text-sm flex mt-0">
-                    <UserRound size={20} className="text-chart-7 mr-2" /> Full
-                    Name
+
+                  {/* Name */}
+                  <label className="text-sm flex">
+                    <UserRound size={20} className="mr-2" /> Full Name
                   </label>
                   <input
                     type="text"
-                    value={userProfile[0].name}
-                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/40"
+                    defaultValue={userProfile.name}
+                    disabled={!isEdit}
+                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
 
+                  {/* Email */}
                   <label className="text-sm flex">
-                    <Mail size={20} className="text-chart-7 mr-2" /> Email
+                    <Mail size={20} className="mr-2" /> Email
                   </label>
                   <input
                     type="email"
-                    value={userProfile[0].email}
-                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/40"
+                    defaultValue={userProfile.email}
+                    disabled={!isEdit}
+                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
 
+                  {/* Phone */}
                   <label className="text-sm flex">
-                    <Phone size={20} className="text-chart-7 mr-2" /> Phone
-                    Number
+                    <Phone size={20} className="mr-2" /> Phone Number
                   </label>
                   <input
                     type="text"
-                    value={userProfile[0].phoneNumber}
-                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/40"
+                    defaultValue={userProfile.phoneNumber}
+                    disabled={!isEdit}
+                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
 
+                  {/* Address */}
                   <label className="text-sm flex">
-                    <MapPin size={20} className="text-chart-7 mr-2" /> Address
+                    <MapPin size={20} className="mr-2" /> Address
                   </label>
                   <textarea
                     rows={3}
-                    value={userProfile[0].address}
-                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/40"
+                    defaultValue={userProfile.address}
+                    disabled={!isEdit}
+                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
 
-                  <label className="text-sm flex">
-                    <HardDriveUpload size={20} className="text-chart-7 mr-2" />{" "}
-                    Upload Logo
-                  </label>
-                  <input
-                    type="file"
-                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20"
-                  />
+                   <label className="text-sm flex">
+                        <HardDriveUpload size={20} className="mr-2" /> Upload Logo
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={userProfile.logoUrl}
+                        disabled={!isEdit}
+                        className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20"
+                      />
 
+
+                  {/* Password */}
                   <label className="text-sm flex">
-                    <Lock size={20} className="text-chart-7 mr-2" /> Password
+                    <Lock size={20} className="mr-2" /> Password
                   </label>
                   <input
                     type="password"
-                    value={userProfile[0].password}
-                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 focus:outline-none focus:border-white/40"
+                    defaultValue={userProfile.password}
+                    disabled={!isEdit}
+                    className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
+
+                     {isEdit && (
+                    <>
+                      <label className="text-sm flex">
+                        <HardDriveUpload size={20} className="mr-2" /> Upload Logo
+                      </label>
+                      <input
+                        type="file"
+                        className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20"
+                      />
+                    </>
+                  )}
+
+                  {/* Save Button */}
+                  {isEdit && (
+                    <Button
+                      className="w-full !bg-gradient-to-r from-[#FB9600] to-[#E27300] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold"
+                      onClick={() => router.push("/chooseTemplate")}
+                    >
+                      Save Changes
+                    </Button>
+                  )}
+
                 </div>
               </form>
+
             </div>
           </div>
         </div>

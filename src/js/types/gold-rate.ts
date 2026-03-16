@@ -7,6 +7,7 @@ export type GoldRateCards = {
 export type SubscriptionPlanCards = {
   id: number;
   plan: string;
+  expiry?: string;
   price: string;
   offer: string;
   save: string;
