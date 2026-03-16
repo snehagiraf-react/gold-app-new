@@ -63,9 +63,9 @@ export default function MySubscription() {
       {({ toggleSidebar, title }) => (
         <div className="flex justify-center">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl h-screen bg-[#093D39] flex flex-col">
-            <Header 
-              onMenuClick={toggleSidebar} 
-              title={title} 
+            <Header
+              onMenuClick={toggleSidebar}
+              title={title}
               showBackground={false}
               showBackButton={true}
               onBackClick={() => router.back()}

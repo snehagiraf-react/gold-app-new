@@ -94,7 +94,9 @@ export default function Index() {
                   Choose Your Template
                 </Button>
 
-                <Button className="w-full !bg-transparent border-1 !border-[#FB9600] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold">
+                <Button className="w-full !bg-transparent border-1 !border-[#FB9600] !text-white p-5 sm:p-7 rounded-xl text-base sm:text-lg font-bold" 
+                  onClick={() => router.push("/chooseTemplate")}
+                >
                   Create Your Own Template
                 </Button>
               </div>

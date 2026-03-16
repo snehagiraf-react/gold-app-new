@@ -7,6 +7,7 @@ interface HeaderProps {
   title?: string;
   showBackground?: boolean;
   showBackButton?: boolean;
+  showMenuButton?: boolean;
   onBackClick?: () => void;
   iconType?: "menu" | "download" | "share" | "edit";
   titleColor?: string;
@@ -18,6 +19,7 @@ export default function Header({
   title,
   showBackground = true,
   showBackButton = false,
+  showMenuButton = true,
   onBackClick,
   iconType = "menu",
   titleColor = "text-white",
@@ -41,7 +43,7 @@ export default function Header({
   };
 
   return (
-    <div className={`flex items-center top-0 z-30 mt-10 ${showBackground ? "bg-[#093D39]" : ""}`}>
+    <div className={`flex items-center top-0 z-30 mt-10 ${showBackground ? "bg-[#093D39]" : ""}`} >
       
       <button
         onClick={showBackButton && onBackClick ? onBackClick : onMenuClick}

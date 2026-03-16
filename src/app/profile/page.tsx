@@ -35,18 +35,27 @@ export default function Profile() {
 
   const isEdit = pathname.includes("edit-profile");
 
-  const fileInputRef = useRef(null);
+  const profileInputRef = useRef(null);
+  const logoInputRef = useRef(null);
+
   const [profileImage, setProfileImage] = useState(userProfile.image);
+  const [logoPreview, setLogoPreview] = useState(userProfile.logoUrl);
 
   const handleEditProfile = () => {
     router.push("/profile/edit-profile");
   };
 
-  const handleImageUpload = (e) => {
+  const handleProfileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const preview = URL.createObjectURL(file);
-      setProfileImage(preview);
+      setProfileImage(URL.createObjectURL(file));
+    }
+  };
+
+  const handleLogoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setLogoPreview(URL.createObjectURL(file));
     }
   };
 
@@ -81,43 +90,35 @@ export default function Profile() {
               {/* Profile Image */}
               <div className="flex justify-center mt-6">
                 <div className="relative">
-
                   <Image
                     src={profileImage}
                     alt="User"
                     width={100}
                     height={100}
-                    className="rounded-full w-24 h-24 object-cover border-2"
+                    className="rounded-full w-24 h-24 object-cover border-2 border-[#FB9600]"
                   />
-
-                      
 
                   {isEdit && (
                     <>
                       <Button
                         type="button"
-                        onClick={() => fileInputRef.current.click()}
+                        onClick={() => profileInputRef.current.click()}
                         className="absolute bottom-[-5px] right-[-5px] bg-[#FB9600] p-2 rounded-full shadow-md"
                       >
                         <Camera size={16} className="text-white" />
                       </Button>
 
                       <input
-                        ref={fileInputRef}
+                        ref={profileInputRef}
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={handleImageUpload}
+                        onChange={handleProfileUpload}
                       />
                     </>
                   )}
-
                 </div>
               </div>
-
-                        <h2 className="text-lg font-semibold text-white mt-4 text-center" disabled={!isEdit}>
-                  {userProfile.name}
-                </h2>
 
               {/* Form */}
               <form className="mt-10">
@@ -167,16 +168,37 @@ export default function Profile() {
                     className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
 
-                   <label className="text-sm flex">
-                        <HardDriveUpload size={20} className="mr-2" /> Upload Logo
-                      </label>
-                      <input
-                        type="text"
-                        defaultValue={userProfile.logoUrl}
-                        disabled={!isEdit}
-                        className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20"
-                      />
+                  {/* Logo Field (Single Field Editable) */}
+                  <label className="text-sm flex">
+                    <HardDriveUpload size={20} className="mr-2" /> Upload Logo
+                  </label>
 
+                  <div
+                    className={`w-full px-4 py-3 rounded-sm bg-white/10 text-white border border-white/20 flex items-center gap-3 ${
+                      isEdit ? "cursor-pointer" : ""
+                    }`}
+                    onClick={() => isEdit && logoInputRef.current.click()}
+                  >
+                    {/* <Image
+                      src={logoPreview}
+                      alt="Logo"
+                      width={40}
+                      height={40}
+                      className="rounded object-cover"
+                    /> */}
+
+                    <span className="text-sm text-white/70">
+                      {isEdit ? "Click to change logo" : "Company Logo"}
+                    </span>
+                  </div>
+
+                  <input
+                    ref={logoInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleLogoUpload}
+                  />
 
                   {/* Password */}
                   <label className="text-sm flex">
@@ -188,18 +210,6 @@ export default function Profile() {
                     disabled={!isEdit}
                     className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20 disabled:opacity-70"
                   />
-
-                     {isEdit && (
-                    <>
-                      <label className="text-sm flex">
-                        <HardDriveUpload size={20} className="mr-2" /> Upload Logo
-                      </label>
-                      <input
-                        type="file"
-                        className="w-full px-4 py-2 rounded-sm bg-white/10 text-white border border-white/20"
-                      />
-                    </>
-                  )}
 
                   {/* Save Button */}
                   {isEdit && (
