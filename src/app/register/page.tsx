@@ -14,12 +14,11 @@ export default function Register() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     router.push("/subscription-plan");
-  }
+  };
   return (
     <>
       <div className="flex justify-center items-center min-h-screen ">
-      <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative p-6">
-       
+        <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative p-6">
           <h1 className="text-white !text-7xl font-serif text-center mt-15">
             Aurevia
           </h1>
@@ -146,8 +145,7 @@ export default function Register() {
                   )}
                 </button>
               </div>
-              <Button className="w-full py-3 rounded-sm bg-white text-[#275152] font-semibold hover:bg-white/90 transition-colors text-sm" 
-              >
+              <Button className="w-full py-3 rounded-sm bg-white text-[#275152] font-semibold hover:bg-white/90 transition-colors text-sm">
                 Sign Up
               </Button>
 
