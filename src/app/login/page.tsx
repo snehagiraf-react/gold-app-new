@@ -15,11 +15,11 @@ export default function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md min-h-screen bg-[#093D39] overflow-hidden relative flex flex-col justify-center items-center p-6">
-        <h1 className="text-white font-serif text-center mb-8">Aurevia</h1>
+        <h1 className="text-white font-serif text-center">Aurevia</h1>
+            <p className="text-[#ffffffa9] text-center">Welcome Back</p>
 
         <div className="w-full animate-fade-in mt-8">
           <div className="space-y-6">
-            <p className="text-[#ffffffa9] text-center mb-8">Welcome Back</p>
 
             <div className="space-y-4">
               <label htmlFor="email" className="text-white text-sm">

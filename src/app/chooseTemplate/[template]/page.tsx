@@ -98,14 +98,14 @@ export default function TemplateDetail() {
               <div className="flex gap-2 shrink-0">
                 <Button
                   onClick={handleDownload}
-                  className=" text-white hover:bg-white/10 transition-colors !border-none !bg-transparent text-4xl font-extrabold"
+                  className=" text-white hover:bg-white/10 transition-colors !border-none !bg-transparent text-4xl font-extrabold !px-0 !py-0"
                   aria-label="Download template"
                 >
                   <Download size={30} />
                 </Button>
                 <Button
                   onClick={handleShare}
-                  className="text-white hover:bg-white/10 transition-colors !border-none !bg-transparent text-4xl font-extrabold"
+                  className="text-white hover:bg-white/10 transition-colors !border-none !bg-transparent text-4xl font-extrabold "
                   aria-label="Share template"
                 >
                   <Share2 size={30} />

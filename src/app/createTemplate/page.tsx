@@ -5,9 +5,10 @@ import Header from "@/components/header";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Check } from "lucide-react";
 
 export default function CreateTemplates() {
-    
   const templates = [
     { id: 1, image: "/gold.png", name: "Classic Gold Rate" },
     { id: 2, image: "/gold.png", name: "Modern Gold Rate" },
@@ -15,12 +16,13 @@ export default function CreateTemplates() {
   ];
 
   const router = useRouter();
+  const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
+
   return (
     <LayoutWrapper title="">
       {({ toggleSidebar }) => (
         <div className="flex justify-center">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl h-screen bg-[#093D39] flex flex-col">
-            {/* Header with Full Width Search */}
             <Header
               onMenuClick={toggleSidebar}
               title=""
@@ -54,7 +56,6 @@ export default function CreateTemplates() {
               }
             />
 
-            {/* Content */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-white">
               <h2 className="text-xl font-bold text-[#093D39]">
                 Create Your Own Template
@@ -65,32 +66,65 @@ export default function CreateTemplates() {
               </p>
 
               <div className="grid grid-cols-1 gap-6">
-                {templates.map((template) => (
-                  <div key={template.id} className="w-full">
-                    <div className="w-full h-[450px] overflow-hidden rounded-xl">
-                      <Image
-                        src={template.image}
-                        alt={template.name}
-                        width={430}
-                        height={932}
-                        className="w-full h-full object-cover"
-                      />
+                {templates.map((template) => {
+                  const isSelected = selectedTemplate === template.id;
+
+                  return (
+                    <div key={template.id} className="w-full">
+                      {/* Image with checkbox */}
+                      <div
+                        onClick={() =>
+                          setSelectedTemplate((prev) =>
+                            prev === template.id ? null : template.id,
+                          )
+                        }
+                        className="relative w-full h-[450px] overflow-hidden rounded-xl cursor-pointer"
+                      >
+                        <Image
+                          src={template.image}
+                          alt={template.name}
+                          width={430}
+                          height={932}
+                          className="w-full h-full object-cover"
+                        />
+
+                        {/* Checkbox */}
+                        <div
+                          className={`absolute top-3 right-3 w-6 h-6 rounded-md border-2 flex items-center justify-center transition
+                            ${
+                              isSelected
+                                ? "bg-green-500 border-green-500"
+                                : "bg-white border-gray-400"
+                            }`}
+                        >
+                          {isSelected && (
+                            <Check className="w-4 h-4 text-white" />
+                          )}
+                        </div>
+                      </div>
+
+                      <h3 className="text-lg font-semibold text-[#093D39] mt-4">
+                        {template.name}
+                      </h3>
+
+                      <Button
+                        disabled={!isSelected}
+                        className={`w-full mt-3 py-3 rounded-xl font-semibold ${
+                          isSelected
+                            ? "!bg-gradient-to-r from-[#34A76D] to-[#1F7A4C] !text-white"
+                            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        }`}
+                        onClick={() => {
+                          if (isSelected) {
+                            router.push("/image-upload");
+                          }
+                        }}
+                      >
+                        Use Template
+                      </Button>
                     </div>
-
-                    <h3 className="text-lg font-semibold text-[#093D39] mt-4">
-                      {template.name}
-                    </h3>
-
-                    <Button
-                      className="w-full mt-3 !bg-gradient-to-r from-[#34A76D] to-[#1F7A4C] !text-white py-3 rounded-xl font-semibold"
-                      onClick={() =>
-                        router.push("/image-upload")
-                      }
-                    >
-                      Use Template
-                    </Button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

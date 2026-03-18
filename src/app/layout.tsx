@@ -3,7 +3,6 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import PWARegister from "@/components/PWARegister";
 
-
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -48,13 +47,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  
   return (
     <html lang="en">
-      <body
-        className={`${montserrat.variable} antialiased`}
-      >
+      <body className={`${montserrat.variable} antialiased`}>
         <PWARegister />
         <div className="max-w-sm mx-auto min-h-screen relative overflow-hidden">
           {children}
@@ -63,5 +58,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

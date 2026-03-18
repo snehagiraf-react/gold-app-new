@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import {
   X,
   Home,
-  LogIn,
   UserPlus,
-  CreditCard,
-  FileText,
+  CalendarCheck ,
   LogOut,
+  Wallpaper,
+  LayoutPanelTop
 } from "lucide-react";
 
 interface SidebarProps {
@@ -23,16 +23,16 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const menuItems = [
     { href: "/home", label: "Home", icon: Home },
     { href: "/profile", label: "Profile", icon: UserPlus },
-    { href: "/chooseTemplate", label: "Choose Template", icon: FileText },
+    { href: "/chooseTemplate", label: "Choose Template", icon: LayoutPanelTop  },
     {
       href: "/my-subscription",
       label: "Subscription Plan",
-      icon: CreditCard,
+      icon: CalendarCheck ,
     },
     {
       href: "/imageManager",
       label: "Image Manager",
-      icon: FileText,
+      icon: Wallpaper,
     }
 
   ];
@@ -49,12 +49,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar */}
       <div
-        className={`absolute top-0 left-0 h-screen text-white z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
+        className={`absolute top-0 left-0 h-screen text-white z-50 w-full transform transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-7 border-b border-white/10 bg-[#093D39] h-40 w-75 flex-shrink-0">
+        <div className="flex items-center justify-between p-7 border-b border-white/10 bg-[#093D39] h-40 flex-shrink-0">
           <h2 className="text-xl font-semibold">Account</h2>
           <button
             onClick={onClose}
@@ -94,12 +94,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* Footer Info */}
         <div className="p-4 border-t border-white/10 flex-shrink-0">
-          <p className=" text-[#093D39]">
+        <footer className="text-sm text-gray-500">
+          <p className=" text-[#093D39] absolute bottom-10 left-4">
             <Link href="/login" className="flex items-center gap-3 text-md font-bold">
               <LogOut size={20} />
               LogOut
             </Link>
           </p>
+          
+          </footer>
         </div>
         </nav>
       </div>
