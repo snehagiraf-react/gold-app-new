@@ -75,7 +75,6 @@ export default function Register() {
                 cols={2}
                 rows={3}
                 id="address"
-                type="text"
                 placeholder="Enter your address"
                 className="w-full px-4 py-2 rounded-sm
                    bg-white/10 text-white

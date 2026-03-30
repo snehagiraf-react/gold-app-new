@@ -35,8 +35,8 @@ export default function Profile() {
 
   const isEdit = pathname.includes("edit-profile");
 
-  const profileInputRef = useRef(null);
-  const logoInputRef = useRef(null);
+const profileInputRef = useRef<HTMLInputElement | null>(null);
+const logoInputRef = useRef<HTMLInputElement | null>(null);
 
   const [profileImage, setProfileImage] = useState(userProfile.image);
   const [logoPreview, setLogoPreview] = useState(userProfile.logoUrl);
@@ -45,19 +45,19 @@ export default function Profile() {
     router.push("/profile/edit-profile");
   };
 
-  const handleProfileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfileImage(URL.createObjectURL(file));
-    }
-  };
+const handleProfileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setProfileImage(URL.createObjectURL(file));
+  }
+};
 
-  const handleLogoUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setLogoPreview(URL.createObjectURL(file));
-    }
-  };
+const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setLogoPreview(URL.createObjectURL(file));
+  }
+};
 
   return (
     <LayoutWrapper title="Profile">
@@ -102,7 +102,7 @@ export default function Profile() {
                     <>
                       <Button
                         type="button"
-                        onClick={() => profileInputRef.current.click()}
+                        onClick={() => profileInputRef.current?.click()}
                         className="absolute bottom-[-5px] right-[-5px] bg-[#FB9600] p-2 rounded-full shadow-md"
                       >
                         <Camera size={16} className="text-white" />
@@ -177,7 +177,7 @@ export default function Profile() {
                     className={`w-full px-4 py-3 rounded-sm bg-white/10 text-white border border-white/20 flex items-center gap-3 ${
                       isEdit ? "cursor-pointer" : ""
                     }`}
-                    onClick={() => isEdit && logoInputRef.current.click()}
+                    onClick={() => isEdit && logoInputRef.current?.click()}
                   >
                     {/* <Image
                       src={logoPreview}

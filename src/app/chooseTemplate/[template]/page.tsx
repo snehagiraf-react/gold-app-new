@@ -33,9 +33,9 @@ export default function TemplateDetail() {
   const templates: {
     [key: string]: { id: string; image: string; logo?: string };
   } = {
-    "1": { id: "1", image: "/template.png", logo: "/bheema.png" },
-    "2": { id: "2", image: "/template.png", logo: "/bheema.png" },
-    "3": { id: "3", image: "/template.png", logo: "/bheema.png" },
+    "1": { id: "1", image: "/template.png", logo: "/bhima.png" },
+    "2": { id: "2", image: "/template.png", logo: "/bhima.png" },
+    "3": { id: "3", image: "/template.png", logo: "/bhima.png" },
   };
 
   const template = templates[templateId as string] || templates["1"];

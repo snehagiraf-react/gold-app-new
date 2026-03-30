@@ -11,6 +11,7 @@ interface HeaderProps {
   onBackClick?: () => void;
   iconType?: "menu" | "download" | "share" | "edit";
   titleColor?: string;
+  iconColor?: string;
   rightAction?: React.ReactNode;
 }
 
